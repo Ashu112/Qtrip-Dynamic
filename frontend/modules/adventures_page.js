@@ -5,6 +5,11 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
+  //console.log("search",search)
+  const param = new URLSearchParams(search);
+ // console.log("param :", param.get('city'))
+  let city = param.get('city')
+  return city;
 
 }
 
@@ -12,15 +17,46 @@ function getCityFromURL(search) {
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+  try{
+    let url = config.backendEndpoint + `/adventures?city=${city}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  }catch(error){
+    console.log(error)
+    return null;
+  }
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-
+  console.log("adventures",adventures)
+  adventures.forEach((value) => {
+    let container = document.createElement("div");
+  container.setAttribute("class"," col-12 col-sm-6 col-lg-3 mb-4");
+  container.innerHTML = `<a id="${value.id}" href="detail/?adventure=${value.id}">
+                          <div class="activity-card " >
+                          <div class="category-banner">${value.category}</div>
+                          <img class="" src ="${value.image}"/>
+                          <div class="d-flex p-2 justify-content-between w-100">
+                          <p>${value.name}</p>
+                          <p>₹ ${value.costPerHead}</p>
+                          </div>
+                          <div class="d-flex p-2 justify-content-between w-100">
+                          <p>Duration</p>
+                          <p>${value.duration} Hours</p>
+                          </div>
+                          </div>
+                          </a>
+                          `
+  document.getElementById("data").appendChild(container);
+  });
+ 
 }
+
+
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
 function filterByDuration(list, low, high) {
