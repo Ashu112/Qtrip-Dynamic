@@ -32,7 +32,6 @@ async function fetchAdventures(city) {
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
-  console.log("adventures",adventures)
   adventures.forEach((value) => {
     let container = document.createElement("div");
   container.setAttribute("class"," col-12 col-sm-6 col-lg-3 mb-4");
@@ -69,7 +68,12 @@ function filterByDuration(list, low, high) {
 function filterByCategory(list, categoryList) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
-
+  //console.log("category:",categoryList)
+  let result = list.filter((item)=>{
+        return categoryList.includes(item.category)
+  })
+  //console.log("result",result)
+  return result;
 }
 
 // filters object looks like this filters = { duration: "", category: [] };
@@ -83,6 +87,11 @@ function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
+  //console.log("list",list);
+ // console.log("filter",filters)
+  if(filters.category.length !== 0){
+    list = filterByCategory(list,filters.category);
+  }
 
 
   // Place holder for functionality to work in the Stubs
@@ -114,6 +123,15 @@ function getFiltersFromLocalStorage() {
 function generateFilterPillsAndUpdateDOM(filters) {
   // TODO: MODULE_FILTERS
   // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
+ // console.log("pills filter",filters)
+  filters.category.forEach((key)=>{
+    //console.log(key)
+    let pill = document.createElement("div");
+    pill.innerHTML = `<div class = "category-filter">${key}</div>`
+    document.getElementById("category-list").appendChild(pill)
+  })
+  
+
 
 }
 export {
