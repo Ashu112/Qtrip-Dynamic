@@ -61,7 +61,10 @@ function addAdventureToDOM(adventures) {
 function filterByDuration(list, low, high) {
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on Duration and return filtered list
-
+    let filteredList = list.filter(key=>{
+      return key.duration >= low && key.duration <= high;
+    })
+    return filteredList;
 }
 
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
@@ -88,9 +91,17 @@ function filterFunction(list, filters) {
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
   // 2. Depending on which filters are needed, invoke the filterByDuration() and/or filterByCategory() methods
   //console.log("list",list);
- // console.log("filter",filters)
+  console.log("filter",filters)
   if(filters.category.length !== 0){
     list = filterByCategory(list,filters.category);
+  }
+  if(filters.duration != ""){
+    console.log(filters.duration)
+    let rangeArray = filters.duration.split("-");
+    let low = parseInt(rangeArray[0]);
+    let high = parseInt(rangeArray[1]);
+    console.log("low and high",low,high)
+    list = filterByDuration(list,low,high)
   }
 
 
@@ -102,18 +113,32 @@ function filterFunction(list, filters) {
 function saveFiltersToLocalStorage(filters) {
   // TODO: MODULE_FILTERS
   // 1. Store the filters as a String to localStorage
-
-  return true;
+  try{
+    const filterString = JSON.stringify(filters);
+    localStorage.setItem('filters',filterString);
+    return true;
+  }catch(error){
+    console.log(error)
+    return false;
+  }
+ 
 }
 
 //Implementation of localStorage API to get filters from local storage. This should get called whenever the DOM is loaded.
 function getFiltersFromLocalStorage() {
   // TODO: MODULE_FILTERS
   // 1. Get the filters from localStorage and return String read as an object
-
+  try{
+    const filteredString = localStorage.getItem('filters');
+    const filteres = JSON.parse(filteredString);
+    return filteres;
+  }catch(error){
+    console.log(error);
+    return null;
+  }
 
   // Place holder for functionality to work in the Stubs
-  return null;
+  
 }
 
 //Implementation of DOM manipulation to add the following filters to DOM :
