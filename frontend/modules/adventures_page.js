@@ -34,10 +34,10 @@ function addAdventureToDOM(adventures) {
   // 1. Populate the Adventure Cards and insert those details into the DOM
   adventures.forEach((value) => {
     let container = document.createElement("div");
-  container.setAttribute("class"," col-12 col-sm-6 col-lg-3 mb-4");
+  container.setAttribute("class"," col-6 col-lg-3 mb-4 position-relative");
   container.innerHTML = `<a id="${value.id}" href="detail/?adventure=${value.id}">
-                          <div class="activity-card " >
                           <div class="category-banner">${value.category}</div>
+                          <div class="activity-card " >
                           <img class="" src ="${value.image}"/>
                           <div class="d-flex p-2 justify-content-between w-100">
                           <p>${value.name}</p>
