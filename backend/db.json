@@ -1717,36 +1717,5 @@
       "costPerHead": 823
     }
   ],
-  "reservations": [
-    {
-      "name": "Ashu",
-      "date": "2023-05-27",
-      "person": "2",
-      "adventure": "2447910730",
-      "adventureName": "Niaboytown",
-      "price": 8006,
-      "id": "e84c8a6ab0106db6",
-      "time": "Wed May 24 2023 20:26:15 GMT+0530 (India Standard Time)"
-    },
-    {
-      "name": "Ashu",
-      "date": "2023-05-26",
-      "person": "2",
-      "adventure": "1773524915",
-      "adventureName": "Fort Sion",
-      "price": 5372,
-      "id": "b60fd2d1d8c32ac0",
-      "time": "Wed May 24 2023 20:31:25 GMT+0530 (India Standard Time)"
-    },
-    {
-      "name": "John",
-      "date": "2023-07-13",
-      "person": "5",
-      "adventure": "0610512104",
-      "adventureName": "Nesbridge",
-      "price": 4510,
-      "id": "aa5b5ac09add6efd",
-      "time": "Thu May 25 2023 07:36:37 GMT+0530 (India Standard Time)"
-    }
-  ]
+  "reservations": []
 }
